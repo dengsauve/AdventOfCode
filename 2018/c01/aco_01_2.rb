@@ -5,40 +5,35 @@ t = Time.now
 $freq = 0
 $freqs = {0 => true}
 $found = false
-iters = 1
+$input = File.readlines("freq.txt")
+iters = 0
 
 def loop
-    File.open("freq.txt", "r").each do |change|
-        if change.split("")[0] == "+"
-            $freq += change.split("")[1..-1].join().to_i
-            if $freqs.include?($freq)
-                puts $freq
-                $found = true
-                break
-            else
-                $freqs[$freq] = true
-            end
+    $input.each do |change|
+        arr = change.split("") 
+        if arr[0] == "+"
+            $freq += arr[1..-1].join().to_i
         else
-            $freq -= change.split("")[1..-1].join().to_i
-            if $freqs.include?($freq)
-                puts $freq
-                $found = true
-                break
-            else
-                $freqs[$freq] = true
-            end
+            $freq -= arr[1..-1].join().to_i
+        end
+        if $freqs.include?($freq)
+            puts $freq
+            $found = true
+            break
+        else
+            $freqs[$freq] = true
         end
     end
 end
 
 until $found
     loop()
-    puts "iterations: #{iters}"
     iters += 1
 end
 
 e=Time.now
 
 puts "time elapsed: #{e - t}"
+puts "iterations: #{iters}"
 #puts $freqs
 #433 not right
