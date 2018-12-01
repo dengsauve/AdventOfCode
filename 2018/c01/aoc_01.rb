@@ -1,3 +1,6 @@
+require 'time'
+
+t = Time.now
 freq = 0
 
 File.open("freq.txt", "r").each do |change|
@@ -9,3 +12,5 @@ File.open("freq.txt", "r").each do |change|
 end
 
 puts freq
+e = Time.now
+puts "time elapsed: #{e - t}"
