@@ -2,14 +2,13 @@ log = File.readlines("input.txt")
 
 log.sort_by!{ |entry| entry[0..18]}
 
-#puts log[0..10]
-
 guards = {}
 
 guard = ''
 time = ''
 
-# ix is 20 for log entry start
+# ix is 19 for log entry start
+# Get total minutes of sleep per guard
 log.each do |entry|
     if entry[19] == "G"
         guard = entry.scan(/#\d+/)
@@ -21,6 +20,7 @@ log.each do |entry|
     end
 end
 
+# puts guard with most sleep minutes
 puts guards.max_by{|k,v|v}
 
 # guard #661
@@ -29,6 +29,7 @@ sleeps = {}
 track = true
 time = ''
 
+# Iterate log, for most sleepy guard, find each minute he was asleep every shift
 log.each do | entry |
     if entry[19..29] == "Guard #661 "
         track = true
@@ -48,5 +49,8 @@ log.each do | entry |
     end
 end
 
-puts sleeps
+#puts sleeps
+# display minute most slept during
+
 puts sleeps.max_by{|k,v| v}
+# 0:30 16 times

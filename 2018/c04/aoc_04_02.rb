@@ -4,6 +4,7 @@ sleepies = {}
 log = File.readlines("input.txt")
 log.sort_by!{ |entry| entry[0..18]}
 
+# Get all guards in list
 log.each do |entry|
     if entry[19] == "G" || entry[19] == "g"
         guard = entry.scan(/#\d+/)
@@ -11,8 +12,9 @@ log.each do |entry|
     end
 end
 
+# For each of the guards, grab all the minutes asleep
 guards.each do |guard|
-    # holds the minutes and their values
+    # sleeps holds the minutes and their values
     sleeps = {}
     track = false
     time = ''
@@ -25,8 +27,6 @@ guards.each do |guard|
         elsif entry[19] == "w" and track
             e = entry[15..16]
             (e.to_i - time.to_i).times do | t |
-                #puts "time: #{time} e: #{e} time+t: #{time.to_i + t}"
-                #gets
                 if sleeps.include?(t + time.to_i)
                     sleeps[t + time.to_i] += 1
                 else
@@ -42,11 +42,12 @@ guards.each do |guard|
     m = sleeps.max_by{|k,v| v}
     puts m.inspect
     puts guard
+    # Add the guard and the most minutes asleep on a mintue
     sleepies[guard] = m[1] unless m.nil?
 end
 
-
-puts "MAX", sleepies.max_by{|k, v| v}.inspect,sleepies
+# puts guard that was most asleep on a minute, backtrack to earlier output to figure what minute
+puts "MAX", sleepies.max_by{|k, v| v}.inspect#,sleepies
 
 #12645 not right
 #17212 "   "
