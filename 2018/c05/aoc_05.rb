@@ -1,9 +1,11 @@
+require 'time'
+
 input = File.read("input.txt")
 
+s = Time.now
+
 array = input.split("")
-
 puts "initial count: #{array.length}"
-
 cleared = false
 
 until cleared
@@ -19,6 +21,9 @@ until cleared
     end
 end
 
+e = Time.now
+
 puts array.inspect
 puts "final count: #{array.length}"
+puts "Time elapsed: #{e - s} seconds"
 #27651 not correct

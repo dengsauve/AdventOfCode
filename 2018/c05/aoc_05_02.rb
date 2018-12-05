@@ -1,4 +1,8 @@
+require 'time'
+
 input = File.read("input.txt")
+
+s = Time.now
 
 zarray = input.split("")
 answers = {}
@@ -25,4 +29,8 @@ end
 
 puts answers
 puts answers.min_by{ |k, v| v}
+
+e = Time.now
+
+puts "Time elapsed: #{e - s} seconds"
 # 10862 not right
